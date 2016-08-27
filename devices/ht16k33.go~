@@ -1,0 +1,39 @@
+// Package mcp4725 allows interfacing with Adafruit 0.56" 4-Digit 7-Segment Display w/I2C Backpack
+package ht16k33
+
+import (
+	"github.com/jetsonhacks/jetbot/i2c"
+)
+
+const (
+	ht16k33_blink_cmd = 0x80
+	ht16k33_blink_displayon = 0x01
+	ht16k33_blink_off = 0
+	ht16k33_blink_2hz = 1
+	ht16k33_blink_1hz = 2
+	ht16k33_blink_halfhz  = 3
+	ht16k33_cmd_brightness = 0xE0
+	seven_digits = 5
+)
+
+type HT16K33 {
+        I2CDevice *I2C
+        Bus int
+        FileDescriptor int 
+        I2CAddress int 
+        Error int
+	DisplayBuffer [10] uint16 
+        Position int
+}
+
+// The default address is 0x70 
+func NewHT16K33 ( bus, address int ) *HT16K33 {
+	i2cdevice,err := i2c.NewI2C(bus, address) 
+	if i2cdevice = nil {
+		return nil, err
+	}
+	Bus = bus
+        I2CAddress = address 
+        I2C = i2cdevice 
+}
+
