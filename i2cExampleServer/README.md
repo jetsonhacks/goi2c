@@ -1,20 +1,20 @@
-# goi2c
-Jetson I2C interface in Go (Golang)
-This repository contains some sketches which interface the Jetson Development Kits
-with an I2C interface and web servers.
+A simple example of a Go server which distributes Server Side Events
 
-These examples interface with an Adafruit 0.56" 4-Digit 7-Segment Display w/I2C Backpack.
-The configuration of the interface will depend on how the I2C Backpack is wired to the the Jetson.
-This can be changed in the 'main' function of each example.
+A simple example for the Adafruit 0.56" 4-Digit 7-Segment Display w/I2C Backpack
 
-The folders:
-devices          - holds code for interfacing with the I2C backback 7 segment display
-i2c              - I2C interface library, derived from https://github.com/SpaceLeap/go-embedded/blob/master/i2c/i2c.go
-i2cExample       - Interface with the Jetson to the 7 Segment Display
-i2cExampleServer - A more involved example. Shows digits on the Segment Display, and broadcasts over the Web using Server Side Events (SSE)
-                   HTML 5 Browser required.
+The Templates Directory holds the files to be served, which must be in the directory of the application binary.
 
-Additional Licenses:
+The contents of the 7 Segment Display will be served on:
+
+http://locahost:8000/test
+
+HTML 5 browser required.
+
+The demo app runs through a couple of different displays, timer countdowns and clock displays. These are mirrored on connected web browsers.
+
+Note: When the '----' appears on the 7 segment display, the 7 segment display will blink. Attached web pages do *not* blink.
+
+Licenses:
 
 -----------------------------------------------------
 

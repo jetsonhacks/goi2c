@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>I2C Segment Display Server Side Event Example in Go</title>
+
+    <script type="text/javascript" src="segment-display.js"></script>
+  <script type="text/javascript">
+
+      var display = new SegmentDisplay("displayContext");
+
+      display.pattern         = "##:##";
+      display.value           = "03:15";
+      display.displayAngle    = 6;
+      display.digitHeight     = 20;
+      display.digitWidth      = 14;
+      display.digitDistance   = 2.5;
+      display.segmentWidth    = 2;
+      display.segmentDistance = 0.3;
+      display.segmentCount    = 7;
+      display.cornerType      = 3;
+      display.colorOn         = "#24dd22";
+      display.colorOff        = "#404040";
+    </script>
+    <style>
+    body {
+	background-color: rgb(32,32,32)
+    }
+    </style>
+
+</head>
+<body>
+	<div style="width: 480px; height: 240px; position: relative; background-color: rgb(32,32,32)">
+           <div style="position: absolute; left: 38px; top: 33px; width: 240px; height: 68px">
+             <canvas id="displayContext" width="240" height="68"></canvas>
+           </div>
+	</div>
+
+	<script type="text/javascript">
+
+	    // Create a new HTML5 EventSource
+	    var source = new EventSource('/events/');
+
+	    // Create a callback for when a new message is received.
+	    source.onmessage = function(e) {
+
+	        // Append the `data` attribute of the message to the DOM.
+		// display.setValue('98:76');
+		// display.setValue(e.data)
+		// e.data starts with 'Message: ', splice that out
+		var messageStr = e.data
+		var messageValue = messageStr.slice(9,messageStr.length)
+		// var patternValue = messageValue.replace(new RegExp("[0-9]",'g'),"#")
+		// /d is the same as 0-9
+		var patternValue = messageValue.replace(new RegExp("[^.:]",'g'),"#")
+
+		display.pattern = patternValue
+		display.setValue(messageValue)
+	        // document.body.innerHTML += e.data + '<br>';
+	    };
+	</script>
+</body>
+</html>
+
+
+
+
