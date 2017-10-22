@@ -48,7 +48,7 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Contact GitHub API Training Shop Blog About
 
 -----------------------------------------------------------------------------
-Server Code mostly derived from: 
+Server Code mostly derived from:
 
 https://github.com/kljensen/golang-html5-sse-example
 
