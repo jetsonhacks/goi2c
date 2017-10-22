@@ -81,9 +81,9 @@ func (i2c *I2C) SetAddress(address int) error {
 
 func (i2c *I2C) smbusAccess(readWrite, register uint8, size int, data unsafe.Pointer) (uintptr, error) {
 	args := C.struct_i2c_smbus_ioctl_data{
-		read_write: C.char(readWrite),
+		read_write: C.__u8(readWrite),
 		command:    C.__u8(register),
-		size:       C.int(size),
+		size:       C.__u32(size),
 		data:       (*C.union_i2c_smbus_data)(data),
 	}
 	result, _, errno := syscall.Syscall(syscall.SYS_IOCTL, i2c.file.Fd(), C.I2C_SMBUS, uintptr(unsafe.Pointer(&args)))
@@ -301,5 +301,3 @@ func (i2c *I2C) WriteI2CBlock(register uint8, block []byte) error {
 	_, err := i2c.smbusAccess(C.I2C_SMBUS_WRITE, register, C.I2C_SMBUS_I2C_BLOCK_BROKEN, unsafe.Pointer(&data[0]))
 	return wrapErr("WriteBlock", err)
 }
-
-
