@@ -186,10 +186,8 @@ func MainPageHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Render the template, writing to `w`.
 	// t.Execute(w, "Duder")
-	t.Execute(w,nil)
+	t.Execute(w, nil)
 
 	// Done.
 	log.Println("Finished HTTP request at ", r.URL.Path)
 }
-
-
